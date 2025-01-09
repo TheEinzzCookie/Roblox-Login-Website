@@ -3,3 +3,6 @@ This is an educational roblox phishing site made to grab the user's data. When t
 Please don't use this script for malicious purposes, phishing is against the law, and should not be used to steal anyone's info. Use this code for educational purposes only!
 
 Thank you.
+
+![IMG_3811.jpeg]
+![IMG_3812.jpeg]
