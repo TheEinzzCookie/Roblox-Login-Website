@@ -4,5 +4,5 @@ Please don't use this script for malicious purposes, phishing is against the law
 
 Thank you.
 
-![IMG_3811.jpeg]
-![IMG_3812.jpeg]
+![showcase](IMG_3811.jpeg)
+![showcase](IMG_3812.jpeg)
